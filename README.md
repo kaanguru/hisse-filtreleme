@@ -17,10 +17,12 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 
 **Varsayılan olarak:** 5 yıllık zaman dilimi içinde 4800 nasdaq hisseleri içinde arama yapar.
 
-* Borsa seçmek için: `main -b [kod]`
-* Periyod seçmek için: `main -p [kod]`
+* Borsa seçmek için: `main -b [kod]` veya `main --borsa [kod]`
+* Zaman Aralığı seçmek için: `main -d [kod]` veya `main --devir [kod]`
 
-**Örneğin**: `python .\main.py -b de -p 5y` komutu tüm Almanya borsasında 5 yıllık veriler içinde arama yapar, **data** klasörü içinde **uyumlu-de.csv** dosyasını oluşturup, içine sonuçları yazar.
+Eğer _hiç bir seçenek girilmezse_, Bist içinde 10 yıl geri giderek arama yapar.
+
+**Örneğin**: `python .\main.py -b de -d 5y` komutu tüm Almanya borsasında 5 yıllık veriler içinde arama yapar, **data** klasörü içinde **uyumlu-de.csv** dosyasını oluşturup, içine sonuçları yazar.
 
 ## Kodlar
 
@@ -57,16 +59,12 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 
 [Borsalardan işlem gören hisse listelerinin CSV halleri](https://www.nasdaq.com/market-activity/stocks/screener)
 
-#### adjust all OHLC automatically
+#### Açılış Kapanış düşük ve yüksek değerler otomatik düzeltiliyor
 
-        # (optional, default is False)
-        auto_adjust = True,
-
-        # attempt repair of missing data or currency mixups e.g. $/cents
-        repair = False,
+#### attempt repair of missing data or currency mixups e.g. $/cents
 
 ---
 
 TODO:
 
-* 15 yıllık periyod seçimi ekle
+* 15 yıllık zaman aralığı seçimi ekle

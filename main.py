@@ -6,15 +6,17 @@ borsa = "tr"
 aralik = "10y"
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "b:p:")
+    opts, args = getopt.getopt(argv, "b:d:", 
+                                   ["borsa =",
+                                    "donem ="])
 
 except:
     print("Error")
 
 for opt, arg in opts:
-    if opt in ['-b']:
+    if opt in ['-b', '--borsa']:
         borsa = arg
-    elif opt in ['-p']:
+    elif opt in ['-d', '--donem']:
         aralik = arg
 
 tickers_dosya = pd.read_csv("./data/"+borsa+".csv")
@@ -60,6 +62,7 @@ def fib_seviyeler_arasinda(hisse):
             hisse,
             period=aralik,
             auto_adjust=True,
+            repair = True,
         )
         if hisse in kaldirilmisHisseler:
             return False
