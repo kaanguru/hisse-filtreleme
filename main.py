@@ -59,6 +59,7 @@ def fib_seviyeler_arasinda(hisse):
             hisse,
             period=aralik,
             auto_adjust=True,
+            repair = True,
         )
         if hisse in kaldirilmisHisseler:
             return False

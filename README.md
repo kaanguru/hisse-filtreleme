@@ -13,6 +13,7 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 1. **hisse-filtreleme.zip** dosyasını indir, bilgisayara aç.
 1. main.py dosyasının olduğu klasörde bir terminal (komut satırı) aç.
 1. Sistemine _yfinance_ eklemek için `pip install yfinance` çalıştır.
+1. Sistemine _SciPy_ eklemek için `pip install scipy` çalıştır.
 1. `python main.py` çalıştır.
 
 **Varsayılan olarak:** 5 yıllık zaman dilimi içinde 4800 nasdaq hisseleri içinde arama yapar.
@@ -57,14 +58,17 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 
 [Borsalardan işlem gören hisse listelerinin CSV halleri](https://www.nasdaq.com/market-activity/stocks/screener)
 
-#### adjust all OHLC automatically
+#### Özellikler
 
-        # (optional, default is False)
-        auto_adjust = True,
+* Otomatik kapanış açılış yüksek ve düşük değerlerini düzeltme
+* Eksik veri ve karışıklıkları düzeltme
+* Günlük aralıklarla veri çekilmesi
 
-        # attempt repair of missing data or currency mixups e.g. $/cents
-        repair = False,
 
+        # valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo
+        # (optional, default is '1d')
+        interval = "5d",
+        
 ---
 
 TODO:
