@@ -2,8 +2,8 @@ import yfinance as yf
 import pandas as pd
 import sys
 import getopt
-borsa = "tr"
-donem = "10y"
+borsa = None
+donem = None
 argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "b:d:", 
@@ -55,21 +55,17 @@ kaldirilmisHisseler = [
 def fib_seviyeler_arasinda(hisse):
     # hisse için bir yıllık verileri çek
     try:
-        if borsa == "tr":
-            hisse = hisse + ".IS"
-
         df = yf.download(
             hisse,
-            period=donem,
+            period=aralik,
             auto_adjust=True,
-            repair = True,
         )
         if hisse in kaldirilmisHisseler:
             return False
 
         # Fibonacci sabitleri
-        max_deger = df["High"].max()
-        min_deger = df["Low"].min()
+        max_deger = df["Close"].max()
+        min_deger = df["Close"].min()
         fark = max_deger - min_deger
         dorduncu_seviye = max_deger - fark * 0.618
         son_fiyat = df["Close"].iloc[-1]
