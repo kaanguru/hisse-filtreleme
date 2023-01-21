@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 import getopt
 borsa = "tr"
-aralik = "10y"
+donem = "10y"
 argv = sys.argv[1:]
 try:
     opts, args = getopt.getopt(argv, "b:d:", 
@@ -17,7 +17,7 @@ for opt, arg in opts:
     if opt in ['-b', '--borsa']:
         borsa = arg
     elif opt in ['-d', '--donem']:
-        aralik = arg
+        donem = arg
 
 tickers_dosya = pd.read_csv("./data/"+borsa+".csv")
 tum_hisseler = tickers_dosya["Symbol"]
@@ -60,7 +60,7 @@ def fib_seviyeler_arasinda(hisse):
 
         df = yf.download(
             hisse,
-            period=aralik,
+            period=donem,
             auto_adjust=True,
             repair = True,
         )
