@@ -1,7 +1,23 @@
 import yfinance as yf
 import pandas as pd
+import sys
+import getopt
+borsa = None
+aralik = None
+argv = sys.argv[1:]
+try:
+    opts, args = getopt.getopt(argv, "b:p:")
 
-tickers_dosya = pd.read_csv("./data/es.csv")
+except:
+    print("Error")
+
+for opt, arg in opts:
+    if opt in ['-b']:
+        borsa = arg
+    elif opt in ['-p']:
+        aralik = arg
+
+tickers_dosya = pd.read_csv("./data/"+borsa+".csv")
 tum_hisseler = tickers_dosya["Symbol"]
 uyumluHisseler = []
 kaldirilmisHisseler = [
@@ -33,12 +49,13 @@ kaldirilmisHisseler = [
     "XLNX",
 ]
 
+
 def fib_seviyeler_arasinda(hisse):
     # hisse için bir yıllık verileri çek
     try:
         df = yf.download(
             hisse,
-            period="max",
+            period=aralik,
             # interval="1h",
         )
         if hisse in kaldirilmisHisseler:
@@ -51,11 +68,12 @@ def fib_seviyeler_arasinda(hisse):
         dorduncu_seviye = max_deger - fark * 0.618
         son_fiyat = df["Close"].iloc[-1]
 
-        if  son_fiyat < dorduncu_seviye:
+        if son_fiyat < dorduncu_seviye:
             return True
 
     except:
         kaldirilmisHisseler.append(hisse)
+
 
 for hisse in tum_hisseler:
     if fib_seviyeler_arasinda(hisse):
@@ -69,6 +87,6 @@ print("Kaldirilanlar hisseler:" + str(kaldirilmisHisseler))
 print(str(len(kaldirilmisHisseler)) + " adet hisse kalkmis")
 
 uyumluHisSerisi = pd.Series(uyumluHisseler)
-uyumluHisSerisi.to_csv("./data/uyumlu.csv")
+uyumluHisSerisi.to_csv("./data/uyumlu-"+borsa+".csv")
 kaldHisSerisi = pd.Series(kaldirilmisHisseler)
-kaldHisSerisi.to_csv("./data/kalkmis.csv")
+kaldHisSerisi.to_csv("./data/kalkmis-"+borsa+".csv")
