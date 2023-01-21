@@ -6,18 +6,16 @@ borsa = None
 donem = None
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "b:d:", 
-                                   ["borsa =",
-                                    "donem ="])
+    opts, args = getopt.getopt(argv, "b:p:")
 
 except:
     print("Error")
 
 for opt, arg in opts:
-    if opt in ['-b', '--borsa']:
+    if opt in ['-b']:
         borsa = arg
-    elif opt in ['-d', '--donem']:
-        donem = arg
+    elif opt in ['-p']:
+        aralik = arg
 
 tickers_dosya = pd.read_csv("./data/"+borsa+".csv")
 tum_hisseler = tickers_dosya["Symbol"]
