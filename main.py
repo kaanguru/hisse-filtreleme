@@ -53,6 +53,8 @@ kaldirilmisHisseler = [
 def fib_seviyeler_arasinda(hisse):
     # hisse için bir yıllık verileri çek
     try:
+        if borsa == "tr":
+            hisse = hisse + ".IS"
         df = yf.download(
             hisse,
             period=aralik,
@@ -62,8 +64,8 @@ def fib_seviyeler_arasinda(hisse):
             return False
 
         # Fibonacci sabitleri
-        max_deger = df["Close"].max()
-        min_deger = df["Close"].min()
+        max_deger = df["High"].max()
+        min_deger = df["Low"].min()
         fark = max_deger - min_deger
         dorduncu_seviye = max_deger - fark * 0.618
         son_fiyat = df["Close"].iloc[-1]
