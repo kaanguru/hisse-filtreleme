@@ -32,9 +32,8 @@ Sonuçlar Excel dosyası halinde verilir.
 
 ## Kurulum
 
-1. [python 3](https://www.python.org/downloads/) kur
-
-1. **hisse-filtreleme.zip** dosyasını indir, bilgisayara aç.
+1. [python 3](https://www.python.org/downloads/) kur. `python --version` ile kurulumu kontrol et.
+1. [hisse-filtreleme.zip](https://github.com/kaanguru/hisse-filtreleme/archive/refs/heads/master.zip) dosyasını indir, bilgisayara aç.
 1. _main.py_ dosyasının olduğu klasörde bir terminal (komut satırı) aç.
 1. `python -m pip install -r requirements.txt` komutu çalıştır.
 1. Programı `python main.py -b de -p 5y` komutu ile çalıştır.

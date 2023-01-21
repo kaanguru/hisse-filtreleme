@@ -2,17 +2,21 @@ import yfinance as yf
 import pandas as pd
 import sys
 import getopt
+from datetime import date, timedelta
+
 borsa = None
 donem = None
 kaldir = False
 mum = "1d"
 argv = sys.argv[1:]
+
+start = "2017-01-01"
+end = date.today()- timedelta(days=15*365)
+
 try:
     opts, args = getopt.getopt(argv, "b:p:m:k")
-
 except:
     print("Seçenek Hatası")
-
 for opt, arg in opts:
     if opt in ['-b']:
         borsa = arg
@@ -66,7 +70,7 @@ def fib_seviyeler_arasinda(hisse):
             period=aralik,
             auto_adjust=True,
             repair=True,
-            interval = mum,
+            interval=mum,
         )
         if hisse in kaldirilmisHisseler:
             return False
