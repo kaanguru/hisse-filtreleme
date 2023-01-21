@@ -90,6 +90,6 @@ print("Kaldirilanlar hisseler:" + str(kaldirilmisHisseler))
 print(str(len(kaldirilmisHisseler)) + " adet hisse kalkmis")
 
 uyumluHisSerisi = pd.Series(uyumluHisseler)
-uyumluHisSerisi.to_csv("./data/uyumlu-"+borsa+".csv")
+uyumluHisSerisi.to_csv("./data/sonuclar/uyumlu-"+borsa+".csv")
 kaldHisSerisi = pd.Series(kaldirilmisHisseler)
-kaldHisSerisi.to_csv("./data/kalkmis-"+borsa+".csv")
+kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+borsa+".csv")
