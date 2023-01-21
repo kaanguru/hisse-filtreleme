@@ -12,9 +12,26 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 
 1. **hisse-filtreleme.zip** dosyasını indir, bilgisayara aç.
 1. main.py dosyasının olduğu klasörde bir terminal (komut satırı) aç.
+1. Windows için: `py -m pip install -r requirements.txt` komutu çalıştır.
+1. Programı `python main.py -b de -p 5y` komutu ile çalıştır.
+
+<details><summary>linux ve macos için gerekli paketleri yükleme </summary>
+<p>
+
+`python -m pip install -r requirements.txt`
+
+</p>
+</details>
+
+<details><summary>PIP olmadan DETAYLI KURULUM İÇİN TIKLA</summary>
+<p>
+
 1. Sistemine _yfinance_ eklemek için `pip install yfinance` çalıştır.
 1. Sistemine _SciPy_ eklemek için `pip install scipy` çalıştır.
-1. `python main.py` çalıştır.
+
+</p>
+</details>
+
 
 **Varsayılan olarak:** 5 yıllık zaman dilimi içinde 4800 nasdaq hisseleri içinde arama yapar.
 
