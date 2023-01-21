@@ -123,3 +123,4 @@ _Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak i
 Sembolleri bulmak için:
 [Borsalardan işlem gören hisse listelerinin CSV halleri](https://www.nasdaq.com/market-activity/stocks/screener)
 
+TODO: [Virtual Environments](https://docs.python.org/3/tutorial/venv.html)

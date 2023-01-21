@@ -8,10 +8,13 @@ borsa = None
 aralik = None
 kaldir = False
 mum = "1d"
-argv = sys.argv[1:]
-
-onbesyilonce = date.today() - timedelta(days=15*365)
+onBesYilOncesi = date.today() - timedelta(days=15*365)
 bugun = date.today()
+argv = sys.argv[1:]
+sembolDosyasi = pd.read_csv("./data/semboller/"+borsa+".csv")
+tumHisseler = sembolDosyasi["Symbol"]
+uyumluHisseler = []
+kaldirilmisHisseler = pd.read_csv("./data/kalkmis/kalkmis"+borsa+".csv")["Symbol"]
 
 try:
     opts, args = getopt.getopt(argv, "b:p:m:k")
@@ -27,48 +30,14 @@ for opt, arg in opts:
     elif opt in ['-m']:
         mum = arg
 
-tickers_dosya = pd.read_csv("./data/semboller/"+borsa+".csv")
-tum_hisseler = tickers_dosya["Symbol"]
-uyumluHisseler = []
-kaldirilmisHisseler = [
-    "ALXN",
-    "ANTM",
-    "BF.B",
-    "BLL",
-    "BRK.B",
-    "CERN",
-    "COG",
-    "CTXS",
-    "CXO",
-    "DISCA",
-    "DISCK",
-    "FB",
-    "FLIR",
-    "HFC",
-    "INFO",
-    "KSU",
-    "LB",
-    "MXIM",
-    "NLOK",
-    "NLSN",
-    "PBCT",
-    "TIF",
-    "VAR",
-    "VIAC",
-    "WLTW",
-    "XLNX",
-]
-
-
 def fib_seviyeler_arasinda(hisse):
-    # hisse için bir yıllık verileri çek
     try:
         if borsa == "tr":
             hisse = hisse + ".IS"
         if aralik == "15y":
             df = yf.download(
                 hisse,
-                start=onbesyilonce,
+                start=onBesYilOncesi,
                 end=bugun,
                 auto_adjust=True,
                 repair=True,
@@ -85,7 +54,6 @@ def fib_seviyeler_arasinda(hisse):
         if hisse in kaldirilmisHisseler:
             return False
 
-        # Fibonacci sabitleri
         max_deger = df["High"].max()
         min_deger = df["Low"].min()
         fark = max_deger - min_deger
@@ -99,8 +67,7 @@ def fib_seviyeler_arasinda(hisse):
         if kaldir:
             kaldirilmisHisseler.append(hisse)
 
-
-for hisse in tum_hisseler:
+for hisse in tumHisseler:
     if fib_seviyeler_arasinda(hisse):
         uyumluHisseler.append(hisse)
 
