@@ -2,19 +2,33 @@
 
 Fibonacci Geri çekilmesi seviyelerine göre hisse filtreleme yapabilirsiniz.
 
-Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur
+Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 
-İyi bir internet hızınız varsa, her hissenin kontrolü ortalama 0,25 saniye sürer.
+_İyi bir internet hızınız varsa_, her hissenin kontrolü ortalama 0,25 saniye sürer.
 
 Sonuçlar Excel dosyası halinde verilir.
 
+## İçindekiler
+
+- [Özellikler](#Özellikler)
+- [Kurulum](#kurulum)
+- [Kullanım](#Kullanım)
+- [Kodlar](#kodlar)
+  - [Ülke BORSA kodları](#Ülke-BORSA-kodları)
+  - [Geçerli periyodlar](#Geçerli-periyodlar)
+  - [Geçerli Mum kodları](#Geçerli-Mum-kodları)
+- [Diğer bağlantılar](#Diğer-bağlantılar)
+
 ## Özellikler
 
-* Otomatik kapanış açılış yüksek ve düşük değerlerini düzeltme
-* Eksik veri ve karışıklıkları düzeltme
-* Günlük aralıklarla veri çekilmesi
-* Sorgunun yapılacağı mumların seçimi
-* Borsalardan kaldırılmış hisseleri bulma seçeneği
+- Otomatik kapanış açılış yüksek ve düşük değerlerini düzeltme
+- Eksik veri ve karışıklıkları düzeltme
+- Günlük aralıklarla veri çekilmesi
+- Sorgunun yapılacağı mumların seçimi
+- Borsalardan kaldırılmış hisseleri bulma seçeneği
+
+<a target="new" href="https://pypi.python.org/pypi/yfinance"><img border=0 src="https://img.shields.io/badge/python-3,%203.1+-blue.svg?style=flat" alt="Python version"></a>
+<a target="new" href="https://github.com/kaanguru/hisse-filtreleme"><img border=0 src="https://img.shields.io/github/stars/kaanguru/hisse-filtreleme.svg?style=social&label=Star&maxAge=60" alt="Star this repo"></a>
 
 ## Kurulum
 
@@ -34,16 +48,16 @@ Sonuçlar Excel dosyası halinde verilir.
 </p>
 </details>
 
-## Kullanımı
+## Kullanım
 
 `python .\main.py -b [borsa kodu] -p [periyod kodu]`
 
-* Borsa seçmek için: `-b [kod]`
-* Periyod seçmek için: `-p [kod]`
+- Borsa seçmek için: `-b [kod]`
+- Periyod seçmek için: `-p [kod]`
 
 **Tercihen**
 
-* Mum seçmek için: `-m [kod]`
+- Mum seçmek için: `-m [kod]`
 
 ---
 
@@ -109,4 +123,4 @@ Sembolleri bulmak için:
 
 Yapılacaklar:
 
-* 15 yıllık periyod seçimi eklenecek
+- 15 yıllık periyod seçimi eklenecek
