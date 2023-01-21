@@ -57,6 +57,14 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 
 [Borsalardan işlem gören hisse listelerinin CSV halleri](https://www.nasdaq.com/market-activity/stocks/screener)
 
+#### adjust all OHLC automatically
+
+        # (optional, default is False)
+        auto_adjust = True,
+
+        # attempt repair of missing data or currency mixups e.g. $/cents
+        repair = False,
+
 ---
 
 TODO:
