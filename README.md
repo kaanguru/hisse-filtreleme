@@ -2,28 +2,30 @@
 
 Fibonacci Geri çekilmesi seviyelerine göre hisse filtreleme yapabilirsiniz.
 
-Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
+Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur
 
 İyi bir internet hızınız varsa, her hissenin kontrolü ortalama 0,25 saniye sürer.
+
+Sonuçlar Excel dosyası halinde verilir.
+
+## Özellikler
+
+* Otomatik kapanış açılış yüksek ve düşük değerlerini düzeltme
+* Eksik veri ve karışıklıkları düzeltme
+* Günlük aralıklarla veri çekilmesi
+* Sorgunun yapılacağı mumların seçimi
+* Borsalardan kaldırılmış hisseleri bulma seçeneği
 
 ## Kurulum
 
 1. [python 3](https://www.python.org/downloads/) kur
 
 1. **hisse-filtreleme.zip** dosyasını indir, bilgisayara aç.
-1. main.py dosyasının olduğu klasörde bir terminal (komut satırı) aç.
-1. Windows için: `py -m pip install -r requirements.txt` komutu çalıştır.
+1. *main.py* dosyasının olduğu klasörde bir terminal (komut satırı) aç.
+1. `python -m pip install -r requirements.txt` komutu çalıştır.
 1. Programı `python main.py -b de -p 5y` komutu ile çalıştır.
 
-<details><summary>linux ve macos için gerekli paketleri yükleme </summary>
-<p>
-
-`python -m pip install -r requirements.txt`
-
-</p>
-</details>
-
-<details><summary>PIP olmadan DETAYLI KURULUM İÇİN TIKLA</summary>
+<details><summary>PIP olmadan gerekli paketlerin kurulumu İÇİN TIKLA</summary>
 <p>
 
 1. Sistemine _yfinance_ eklemek için `pip install yfinance` çalıştır.
@@ -32,10 +34,24 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 </p>
 </details>
 
-* Borsa seçmek için: `main -b [kod]`
-* Periyod seçmek için: `main -p [kod]`
+## Kullanımı
+`python .\main.py -b [borsa kodu] -p [periyod kodu]`
+* Borsa seçmek için: `-b [kod]`
+* Periyod seçmek için: `-p [kod]`
 
-**Örneğin**: `python .\main.py -b de -p 5y` komutu tüm Almanya borsasında 5 yıllık veriler içinde arama yapar, **data** klasörü içinde **uyumlu-de.csv** dosyasını oluşturup, içine sonuçları yazar.
+**Tercihen**
+
+* Mum seçmek için: `-m [kod]`
+
+---
+
+**Örneğin**:
+
+ `python .\main.py -b de -p 5y` 
+ 
+ Almanya borsasında 5 yıllık veriler içinde arama yapar, **data** klasörü içinde **uyumlu-de.csv** dosyasını oluşturup, içine sonuçları yazar.
+
+---
 
 ## Kodlar
 
@@ -66,25 +82,29 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 | geçen yıl bu zamandan itibaren |ytd |
 | Tüm geçmiş veriler |max |
 
+### Geçerli Mum kodları
+
+Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak ilerde gerekebilir.
+
+| Mum  | kod|
+|----------|---|
+| Yarım Saat |30m|
+| Saatlik |60m|
+| Günlük  |1d |
+| 5 Günlük   |5d |
+| Haftalık |1wk |
+| Aylık |1mo |
+| 3 Aylık|3mo |
+
 ### Diğer bağlantılar
 
 [yfinance dökümanları](https://openbase.com/python/yfinance/documentation)
 
+Sembolleri bulmak için: 
 [Borsalardan işlem gören hisse listelerinin CSV halleri](https://www.nasdaq.com/market-activity/stocks/screener)
 
-#### Özellikler
-
-* Otomatik kapanış açılış yüksek ve düşük değerlerini düzeltme
-* Eksik veri ve karışıklıkları düzeltme
-* Günlük aralıklarla veri çekilmesi
-
-
-        # valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo
-        # (optional, default is '1d')
-        interval = "5d",
-        
 ---
 
-TODO:
+Yapılacaklar:
 
-* 15 yıllık periyod seçimi ekle
+* 15 yıllık periyod seçimi eklenecek

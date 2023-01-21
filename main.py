@@ -5,9 +5,10 @@ import getopt
 borsa = None
 donem = None
 kaldir = False
+mum = "1d"
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "b:p:k")
+    opts, args = getopt.getopt(argv, "b:p:m:k")
 
 except:
     print("Seçenek Hatası")
@@ -19,6 +20,8 @@ for opt, arg in opts:
         aralik = arg
     elif opt in ['-k']:
         kaldir = True
+    elif opt in ['-m']:
+        mum = arg
 
 tickers_dosya = pd.read_csv("./data/semboller/"+borsa+".csv")
 tum_hisseler = tickers_dosya["Symbol"]
@@ -63,6 +66,7 @@ def fib_seviyeler_arasinda(hisse):
             period=aralik,
             auto_adjust=True,
             repair=True,
+            interval = mum,
         )
         if hisse in kaldirilmisHisseler:
             return False
