@@ -20,7 +20,7 @@ for opt, arg in opts:
     elif opt in ['-k']:
         kaldir = True
 
-tickers_dosya = pd.read_csv("./data/"+borsa+".csv")
+tickers_dosya = pd.read_csv("./data/semboller/"+borsa+".csv")
 tum_hisseler = tickers_dosya["Symbol"]
 uyumluHisseler = []
 kaldirilmisHisseler = [
