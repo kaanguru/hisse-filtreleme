@@ -109,6 +109,7 @@ _Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak i
 |----------|---|
 | Yarım Saat |30m|
 | Saatlik |60m|
+| 1,5 Saatlik |90m|
 | Günlük  |1d |
 | 5 Günlük   |5d |
 | Haftalık |1wk |
@@ -122,8 +123,3 @@ _Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak i
 Sembolleri bulmak için:
 [Borsalardan işlem gören hisse listelerinin CSV halleri](https://www.nasdaq.com/market-activity/stocks/screener)
 
----
-
-Yapılacaklar:
-
-- 15 yıllık periyod seçimi eklenecek
