@@ -32,9 +32,6 @@ Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
 </p>
 </details>
 
-
-**Varsayılan olarak:** 5 yıllık zaman dilimi içinde 4800 nasdaq hisseleri içinde arama yapar.
-
 * Borsa seçmek için: `main -b [kod]`
 * Periyod seçmek için: `main -p [kod]`
 
