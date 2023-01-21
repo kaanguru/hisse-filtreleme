@@ -28,14 +28,16 @@ Sonuçlar Excel dosyası halinde verilir.
 <details><summary>PIP olmadan gerekli paketlerin kurulumu İÇİN TIKLA</summary>
 <p>
 
-1. Sistemine _yfinance_ eklemek için `pip install yfinance` çalıştır.
-1. Sistemine _SciPy_ eklemek için `pip install scipy` çalıştır.
+1. Sistemine *yfinance* eklemek için `pip install yfinance` çalıştır.
+1. Sistemine *SciPy* eklemek için `pip install scipy` çalıştır.
 
 </p>
 </details>
 
 ## Kullanımı
+
 `python .\main.py -b [borsa kodu] -p [periyod kodu]`
+
 * Borsa seçmek için: `-b [kod]`
 * Periyod seçmek için: `-p [kod]`
 
@@ -47,8 +49,8 @@ Sonuçlar Excel dosyası halinde verilir.
 
 **Örneğin**:
 
- `python .\main.py -b de -p 5y` 
- 
+ `python .\main.py -b de -p 5y`
+
  Almanya borsasında 5 yıllık veriler içinde arama yapar, **data** klasörü içinde **uyumlu-de.csv** dosyasını oluşturup, içine sonuçları yazar.
 
 ---
@@ -100,7 +102,7 @@ Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak il
 
 [yfinance dökümanları](https://openbase.com/python/yfinance/documentation)
 
-Sembolleri bulmak için: 
+Sembolleri bulmak için:
 [Borsalardan işlem gören hisse listelerinin CSV halleri](https://www.nasdaq.com/market-activity/stocks/screener)
 
 ---
