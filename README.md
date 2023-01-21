@@ -97,6 +97,7 @@ Sonuçlar Excel dosyası halinde verilir.
 | 2 Yıllık |2y |
 | 5 Yıllık |5y |
 | 10 Yıllık|10y |
+| 15 Yıllık|15y |
 | geçen yıl bu zamandan itibaren |ytd |
 | Tüm geçmiş veriler |max |
 

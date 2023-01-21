@@ -5,13 +5,13 @@ import getopt
 from datetime import date, timedelta
 
 borsa = None
-donem = None
+aralik = None
 kaldir = False
 mum = "1d"
 argv = sys.argv[1:]
 
-start = "2017-01-01"
-end = date.today()- timedelta(days=15*365)
+onbesyilonce = date.today() - timedelta(days=15*365)
+bugun = date.today()
 
 try:
     opts, args = getopt.getopt(argv, "b:p:m:k")
@@ -65,13 +65,23 @@ def fib_seviyeler_arasinda(hisse):
     try:
         if borsa == "tr":
             hisse = hisse + ".IS"
-        df = yf.download(
-            hisse,
-            period=aralik,
-            auto_adjust=True,
-            repair=True,
-            interval=mum,
-        )
+        if aralik == "15y":
+            df = yf.download(
+                hisse,
+                start=onbesyilonce,
+                end=bugun,
+                auto_adjust=True,
+                repair=True,
+                interval=mum,
+            )
+        else:
+            df = yf.download(
+                hisse,
+                period=aralik,
+                auto_adjust=True,
+                repair=True,
+                interval=mum,
+            )
         if hisse in kaldirilmisHisseler:
             return False
 
