@@ -4,18 +4,21 @@ import sys
 import getopt
 borsa = None
 donem = None
+kaldir = False
 argv = sys.argv[1:]
 try:
-    opts, args = getopt.getopt(argv, "b:p:")
+    opts, args = getopt.getopt(argv, "b:p:k")
 
 except:
-    print("Error")
+    print("Seçenek Hatası")
 
 for opt, arg in opts:
     if opt in ['-b']:
         borsa = arg
     elif opt in ['-p']:
         aralik = arg
+    elif opt in ['-k']:
+        kaldir = True
 
 tickers_dosya = pd.read_csv("./data/"+borsa+".csv")
 tum_hisseler = tickers_dosya["Symbol"]
@@ -59,7 +62,7 @@ def fib_seviyeler_arasinda(hisse):
             hisse,
             period=aralik,
             auto_adjust=True,
-            repair = True,
+            repair=True,
         )
         if hisse in kaldirilmisHisseler:
             return False
@@ -75,7 +78,8 @@ def fib_seviyeler_arasinda(hisse):
             return True
 
     except:
-        kaldirilmisHisseler.append(hisse)
+        if kaldir:
+            kaldirilmisHisseler.append(hisse)
 
 
 for hisse in tum_hisseler:
@@ -86,10 +90,11 @@ for hisse in tum_hisseler:
 
 print("Uyumlu hisseler:" + str(uyumluHisseler))
 print(str(len(uyumluHisseler)) + " adet hisse fib uyumlu")
-print("Kaldirilanlar hisseler:" + str(kaldirilmisHisseler))
-print(str(len(kaldirilmisHisseler)) + " adet hisse kalkmis")
-
 uyumluHisSerisi = pd.Series(uyumluHisseler)
 uyumluHisSerisi.to_csv("./data/sonuclar/uyumlu-"+borsa+".csv")
-kaldHisSerisi = pd.Series(kaldirilmisHisseler)
-kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+borsa+".csv")
+
+if kaldir:
+    print("Kaldirilanlar hisseler:" + str(kaldirilmisHisseler))
+    print(str(len(kaldirilmisHisseler)) + " adet hisse kalkmis")
+    kaldHisSerisi = pd.Series(kaldirilmisHisseler)
+    kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+borsa+".csv")
