@@ -10,16 +10,16 @@ Sonuçlar Excel dosyası halinde verilir.
 
 ## İçindekiler
 
-- [Özellikler](#Özellikler)
+- [Özellikler](#ozellikler)
 - [Kurulum](#kurulum)
-- [Kullanım](#Kullanım)
-- [Kodlar](#kodlar)
-  - [Ülke BORSA kodları](#Ülke-BORSA-kodları)
-  - [Geçerli periyodlar](#Geçerli-periyodlar)
-  - [Geçerli Mum kodları](#Geçerli-Mum-kodları)
-- [Diğer bağlantılar](#Diğer-bağlantılar)
+- [Kullanım](#kullanim)
+- [Seçenek Kodları](#kodlar)
+  - [Ülke BORSA kodları](#ulke)
+  - [Periyodlar](#periyodlar)
+  - [Mumlar](#mumlar)
+- [Linkler](#linkler)
 
-## Özellikler
+<h2 id="ozellikler">Özellikler</h2>
 
 - Otomatik kapanış açılış yüksek ve düşük değerlerini düzeltme
 - Eksik veri ve karışıklıkları düzeltme
@@ -35,20 +35,20 @@ Sonuçlar Excel dosyası halinde verilir.
 1. [python 3](https://www.python.org/downloads/) kur
 
 1. **hisse-filtreleme.zip** dosyasını indir, bilgisayara aç.
-1. *main.py* dosyasının olduğu klasörde bir terminal (komut satırı) aç.
+1. _main.py_ dosyasının olduğu klasörde bir terminal (komut satırı) aç.
 1. `python -m pip install -r requirements.txt` komutu çalıştır.
 1. Programı `python main.py -b de -p 5y` komutu ile çalıştır.
 
 <details><summary>PIP olmadan gerekli paketlerin kurulumu İÇİN TIKLA</summary>
 <p>
 
-1. Sistemine *yfinance* eklemek için `pip install yfinance` çalıştır.
-1. Sistemine *SciPy* eklemek için `pip install scipy` çalıştır.
+1. Sistemine _yfinance_ eklemek için `pip install yfinance` çalıştır.
+1. Sistemine _SciPy_ eklemek için `pip install scipy` çalıştır.
 
 </p>
 </details>
 
-## Kullanım
+<h2 id="kullanim">Kullanım</h2>
 
 `python .\main.py -b [borsa kodu] -p [periyod kodu]`
 
@@ -71,18 +71,21 @@ Sonuçlar Excel dosyası halinde verilir.
 
 ## Kodlar
 
-### Ülke BORSA kodları
+<h3 id="ulke"> Ülke/BORSA kodları</h3>
 
-| ülke | kod|
--------|----|
-| Norveç |no|
-| İspanya | es |
-| Yunanistan |gr |
-| Almanya |de |
-| BIST |tr |
-| NASDAQ |nas |
+| Ülke | kod|adet|
+-------|----|----|
+| Norveç |no|22|
+| İspanya | es |6|
+| Yunanistan |gr |35|
+| Almanya |de |25|
+| BIST |tr |518|
+| NASDAQ |nas |4689|
+| Tüm Hisseler ! |all |8025|
 
-### Geçerli periyodlar
+**NOT**: _all_ seçeneğinin sonuç bulması yaklaşık 45 dakika sürüyor
+
+### Periyodlar
 
 | Aralık | kod|
 |----------|----|
@@ -98,9 +101,9 @@ Sonuçlar Excel dosyası halinde verilir.
 | geçen yıl bu zamandan itibaren |ytd |
 | Tüm geçmiş veriler |max |
 
-### Geçerli Mum kodları
+### Mumlar
 
-Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak ilerde gerekebilir.
+_Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak ilerde gerekebilir._
 
 | Mum  | kod|
 |----------|---|
@@ -112,7 +115,7 @@ Verilerin hangi aralıklarla çekildiği Fibonacci için gerekli değil ancak il
 | Aylık |1mo |
 | 3 Aylık|3mo |
 
-### Diğer bağlantılar
+### Linkler
 
 [yfinance dökümanları](https://openbase.com/python/yfinance/documentation)
 
