@@ -1,74 +1,39 @@
-import yfinance as yf
 import pandas as pd
 import sys
 import getopt
-from datetime import date, timedelta
-
-borsa = None
-aralik = None
-kaldir = False
-mum = "1d"
-onBesYilOncesi = date.today() - timedelta(days=15*365)
-bugun = date.today()
+import kontroller
+class Secenekler:
+    borsa = None
+    aralik = None
+    mum = "1d"
+    seviye = "618"
+    kaldir = False
 argv = sys.argv[1:]
-sembolDosyasi = pd.read_csv("./data/semboller/"+borsa+".csv")
-tumHisseler = sembolDosyasi["Symbol"]
 uyumluHisseler = []
-kaldirilmisHisseler = pd.read_csv("./data/kalkmis/kalkmis"+borsa+".csv")["Symbol"]
 
 try:
-    opts, args = getopt.getopt(argv, "b:p:m:k")
+    opts, args = getopt.getopt(argv, "b:p:m:k:s")
 except:
     print("Seçenek Hatası")
 for opt, arg in opts:
     if opt in ['-b']:
-        borsa = arg
+        Secenekler.borsa = arg
     elif opt in ['-p']:
-        aralik = arg
+        Secenekler.aralik = arg
     elif opt in ['-k']:
-        kaldir = True
+        Secenekler.kaldir = True
     elif opt in ['-m']:
-        mum = arg
+        Secenekler.mum = arg
+    elif opt in ['-s']:
+        Secenekler.seviye = arg
 
-def fib_seviyeler_arasinda(hisse):
-    try:
-        if borsa == "tr":
-            hisse = hisse + ".IS"
-        if aralik == "15y":
-            df = yf.download(
-                hisse,
-                start=onBesYilOncesi,
-                end=bugun,
-                auto_adjust=True,
-                repair=True,
-                interval=mum,
-            )
-        else:
-            df = yf.download(
-                hisse,
-                period=aralik,
-                auto_adjust=True,
-                repair=True,
-                interval=mum,
-            )
-        if hisse in kaldirilmisHisseler:
-            return False
-
-        max_deger = df["High"].max()
-        min_deger = df["Low"].min()
-        fark = max_deger - min_deger
-        dorduncu_seviye = max_deger - fark * 0.618
-        son_fiyat = df["Close"].iloc[-1]
-
-        if son_fiyat < dorduncu_seviye:
-            return True
-
-    except:
-        if kaldir:
-            kaldirilmisHisseler.append(hisse)
+sembolDosyasi = pd.read_csv("./data/semboller/"+Secenekler.borsa+".csv")
+tumHisseler = sembolDosyasi["Symbol"]
+kaldirilmisHisselerDosyasi = pd.read_csv("./data/kalkmis/kalkmis-"+Secenekler.borsa+".csv")
+kaldirilmisHisseler = kaldirilmisHisselerDosyasi["0"]
 
 for hisse in tumHisseler:
-    if fib_seviyeler_arasinda(hisse):
+    if kontroller.fibSeviyeAltinda(hisse, Secenekler):
         uyumluHisseler.append(hisse)
 
 # Raporlama
@@ -76,10 +41,10 @@ for hisse in tumHisseler:
 print("Uyumlu hisseler:" + str(uyumluHisseler))
 print(str(len(uyumluHisseler)) + " adet hisse fib uyumlu")
 uyumluHisSerisi = pd.Series(uyumluHisseler)
-uyumluHisSerisi.to_csv("./data/sonuclar/uyumlu-"+borsa+".csv")
+uyumluHisSerisi.to_csv("./data/sonuclar/uyumlu-"+Secenekler.borsa+".csv")
 
-if kaldir:
+if Secenekler.kaldir:
     print("Kaldirilanlar hisseler:" + str(kaldirilmisHisseler))
     print(str(len(kaldirilmisHisseler)) + " adet hisse kalkmis")
     kaldHisSerisi = pd.Series(kaldirilmisHisseler)
-    kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+borsa+".csv")
+    kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+Secenekler.borsa+".csv")
