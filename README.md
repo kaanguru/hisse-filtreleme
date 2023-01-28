@@ -104,3 +104,5 @@ Sembolleri bulmak için:
 TODO:
 
 [RSI hesaplama](https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/)
+
+pyinstaller -wF main.py

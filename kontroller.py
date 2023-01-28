@@ -1,6 +1,6 @@
-import yfinance as yf
 from datetime import date, timedelta
-import pandas as pd
+import yfinance as yf
+
 onBesYilOncesi = date.today() - timedelta(days=15*365)
 bugun = date.today()
 
