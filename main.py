@@ -18,7 +18,6 @@ mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
 seviyeler = ("236", "382", "5", "618", "786")
 uyumluHisseler = []
 
-
 class Filtreler:
     borsa = None
     aralik = None
@@ -63,11 +62,9 @@ layout = [
         sg.Cancel("İptal", size=(16, 1), pad=(2, 2)),
     ],
 ]
-window = sg.Window("Hisse filtreleme", layout)
+window = sg.Window("Hisse Filtreleme", layout)
 while True:
     event, values = window.read()
-    if event == sg.WIN_CLOSED or event == "İptal":
-        break
     if event == event == "Ara":
         Filtreler.borsa = values["secilenBorsa"]
         Filtreler.aralik = values["secilenPeriyod"]
@@ -102,5 +99,6 @@ while True:
             f" {len(uyumluHisseler)} adet uyumlu hisse bulundu,yapıştırabilirsiniz",
             str(uyumluHisseler),
         )
-
+    if event == sg.WIN_CLOSED or event == "İptal":
+        break
 window.close()

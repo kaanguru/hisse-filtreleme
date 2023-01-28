@@ -6,15 +6,13 @@ Fibonachi seviyeleri altında kalan hisseleri bulur.
 
 ![screen](screen.gif)
 
-_İyi bir internet hızınız varsa_, her hissenin kontrolü ortalama 0,25 saniye sürer.
+_İyi bir internet hızınız varsa_, her hissenin kontrolü ortalama 0,2 saniye sürer.
 
 Sonuçlar Excel (CSV) dosyası halinde verilir.
 
 ## İçindekiler
 
 - [Özellikler](#ozellikler)
-- [Kurulum](#kurulum)
-- [Kullanım](#kullanim)
 - [Seçenek Kodları](#kodlar)
   - [Ülke BORSA kodları](#ulke)
   - [Periyodlar](#periyodlar)
@@ -32,17 +30,7 @@ Sonuçlar Excel (CSV) dosyası halinde verilir.
 <a target="new" href="https://pypi.python.org/pypi/yfinance"><img border=0 src="https://img.shields.io/badge/python-3,%203.1+-blue.svg?style=flat" alt="Python version"></a>
 <a target="new" href="https://github.com/kaanguru/hisse-filtreleme"><img border=0 src="https://img.shields.io/github/stars/kaanguru/hisse-filtreleme.svg?style=social&label=Star&maxAge=60" alt="Star this repo"></a>
 
-## Kurulum
 
-<h2 id="kullanim">Kullanım</h2>
-
----
-
-**Örneğin**:
-
- `python .\main.py -b de -p 5y`
-
- Almanya borsasında 5 yıllık veriler içinde arama yapar, **data** klasörü içinde **uyumlu-de.csv** dosyasını oluşturup, içine sonuçları yazar.
 
 ---
 
@@ -104,3 +92,5 @@ Sembolleri bulmak için:
 TODO:
 
 [RSI hesaplama](https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/)
+
+pyinstaller -wF main.py
