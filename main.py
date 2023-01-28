@@ -12,6 +12,7 @@ borsalar = (
     "Turkiye",
     "NASDAQ-Large",
     "NASDAQ-Medium",
+    "XKTUM"
 )
 periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd", "max")
 mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
