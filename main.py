@@ -1,50 +1,106 @@
 import pandas as pd
-import sys
-import getopt
+import PySimpleGUI as sg
+
 import kontroller
-class Secenekler:
+
+borsalar = (
+    "Ispanya",
+    "Norvec",
+    "Yunanistan",
+    "NASDAQ-Mega",
+    "Almanya",
+    "Turkiye",
+    "NASDAQ-Large",
+    "NASDAQ-Medium",
+)
+periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd", "max")
+mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
+seviyeler = ("236", "382", "5", "618", "786")
+uyumluHisseler = []
+
+
+class Filtreler:
     borsa = None
     aralik = None
     mum = "1d"
     seviye = "618"
-    kaldir = False
-argv = sys.argv[1:]
-uyumluHisseler = []
 
-try:
-    opts, args = getopt.getopt(argv, "b:p:m:k:s")
-except:
-    print("Seçenek Hatası")
-for opt, arg in opts:
-    if opt in ['-b']:
-        Secenekler.borsa = arg
-    elif opt in ['-p']:
-        Secenekler.aralik = arg
-    elif opt in ['-k']:
-        Secenekler.kaldir = True
-    elif opt in ['-m']:
-        Secenekler.mum = arg
-    elif opt in ['-s']:
-        Secenekler.seviye = arg
 
-sembolDosyasi = pd.read_csv("./data/semboller/"+Secenekler.borsa+".csv")
-tumHisseler = sembolDosyasi["Symbol"]
-kaldirilmisHisselerDosyasi = pd.read_csv("./data/kalkmis/kalkmis-"+Secenekler.borsa+".csv")
-kaldirilmisHisseler = kaldirilmisHisselerDosyasi["0"]
+sg.theme("Material1")
+layout = [
+    [sg.Text("Fibonachi seviyeleri altında kalan hisseleri bulur.")],
+    [sg.Image(filename="./fibo.png")],
+    [sg.HorizontalSeparator()],
+    [
+        sg.Text("Borsa", size=(16, 1), pad=(2, 2)),
+        sg.Drop(borsalar, key="secilenBorsa", default_value="Turkiye"),
+    ],
+    [
+        sg.Text("Zaman Aralığı", size=(16, 1), pad=(2, 2)),
+        sg.Drop(periyodlar, key="secilenPeriyod", default_value="10y"),
+    ],
+    [
+        sg.Text("Mum", size=(16, 1), pad=(2, 2)),
+        sg.Drop(mumlar, key="secilenMum", default_value="1d"),
+    ],
+    [
+        sg.Text("Fibo. Seviyesi        0.", size=(16, 1), pad=(2, 2)),
+        sg.Drop(seviyeler, key="secilenSeviye", default_value="618"),
+    ],
+    [
+        sg.InputText(
+            uyumluHisseler,
+            use_readonly_for_disable=True,
+            disabled=True,
+            key="-OUTPUT-",
+            focus=True,
+            expand_y=True,
+            expand_x=True,
+        )
+    ],
+    [
+        sg.B("Ara", size=(16, 1), pad=(2, 2)),
+        sg.Cancel("İptal", size=(16, 1), pad=(2, 2)),
+    ],
+]
+window = sg.Window("Hisse filtreleme", layout)
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event == "İptal":
+        break
+    if event == event == "Ara":
+        Filtreler.borsa = values["secilenBorsa"]
+        Filtreler.aralik = values["secilenPeriyod"]
+        Filtreler.mum = values["secilenMum"]
+        Filtreler.seviye = values["secilenSeviye"]
+        sembolDosyasi = pd.read_csv("./data/semboller/" + Filtreler.borsa + ".csv")
+        tumSemboller = sembolDosyasi["Symbol"]
+        sayac = 0
+        hisseAdeti = len(tumSemboller)
+        for hisse in tumSemboller:
+            sayac = sayac + 1
+            uyumluHisseler.clear
+            if kontroller.fibSeviyeAltinda(hisse, Filtreler):
+                uyumluHisseler.append(hisse)
+            if (
+                not sg.one_line_progress_meter(
+                    "Bekleyin",
+                    sayac + 1,
+                    hisseAdeti,
+                    Filtreler.borsa + " Borsasında kontrol edilen: " + str(hisse),
+                    grab_anywhere=True,
+                )
+                and sayac + 1 != hisseAdeti
+            ):
+                sg.popup_auto_close("Arama iptal ediliyor.")
+                break
+        uyumluHisSerisi = pd.Series(uyumluHisseler)
+        uyumluHisSerisi.to_csv("./data/sonuclar/Fib-Uyumlu-" + Filtreler.borsa + ".csv")
+        window["-OUTPUT-"].update(uyumluHisseler)
+        sg.clipboard_set(new_value=str(uyumluHisseler))
+        sg.popup(
+            f" {len(uyumluHisseler)} adet uyumlu hisse bulundu,yapıştırabilirsiniz",
+            str(uyumluHisseler),
+        )
 
-for hisse in tumHisseler:
-    if kontroller.fibSeviyeAltinda(hisse, Secenekler):
-        uyumluHisseler.append(hisse)
-
-# Raporlama
-
-print("Uyumlu hisseler:" + str(uyumluHisseler))
-print(str(len(uyumluHisseler)) + " adet hisse fib uyumlu")
-uyumluHisSerisi = pd.Series(uyumluHisseler)
-uyumluHisSerisi.to_csv("./data/sonuclar/uyumlu-"+Secenekler.borsa+".csv")
-
-if Secenekler.kaldir:
-    print("Kaldirilanlar hisseler:" + str(kaldirilmisHisseler))
-    print(str(len(kaldirilmisHisseler)) + " adet hisse kalkmis")
-    kaldHisSerisi = pd.Series(kaldirilmisHisseler)
-    kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+Secenekler.borsa+".csv")
+window.close()
