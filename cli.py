@@ -2,7 +2,8 @@ import pandas as pd
 import sys
 import getopt
 import kontroller
-class Secenekler:
+
+class Filtreler:
     borsa = None
     aralik = None
     mum = "1d"
@@ -17,23 +18,23 @@ except:
     print("Seçenek Hatası")
 for opt, arg in opts:
     if opt in ['-b']:
-        Secenekler.borsa = arg
+        Filtreler.borsa = arg
     elif opt in ['-p']:
-        Secenekler.aralik = arg
+        Filtreler.aralik = arg
     elif opt in ['-k']:
-        Secenekler.kaldir = True
+        Filtreler.kaldir = True
     elif opt in ['-m']:
-        Secenekler.mum = arg
+        Filtreler.mum = arg
     elif opt in ['-s']:
-        Secenekler.seviye = arg
+        Filtreler.seviye = arg
 
-sembolDosyasi = pd.read_csv("./data/semboller/"+Secenekler.borsa+".csv")
-tumHisseler = sembolDosyasi["Symbol"]
-kaldirilmisHisselerDosyasi = pd.read_csv("./data/kalkmis/kalkmis-"+Secenekler.borsa+".csv")
+sembolDosyasi = pd.read_csv("./data/semboller/"+Filtreler.borsa+".csv")
+tumSemboller = sembolDosyasi["Symbol"]
+kaldirilmisHisselerDosyasi = pd.read_csv("./data/kalkmis/kalkmis-"+Filtreler.borsa+".csv")
 kaldirilmisHisseler = kaldirilmisHisselerDosyasi["0"]
 
-for hisse in tumHisseler:
-    if kontroller.fibSeviyeAltinda(hisse, Secenekler):
+for hisse in tumSemboller:
+    if kontroller.fibSeviyeAltinda(hisse, Filtreler):
         uyumluHisseler.append(hisse)
 
 # Raporlama
@@ -41,10 +42,10 @@ for hisse in tumHisseler:
 print("Uyumlu hisseler:" + str(uyumluHisseler))
 print(str(len(uyumluHisseler)) + " adet hisse fib uyumlu")
 uyumluHisSerisi = pd.Series(uyumluHisseler)
-uyumluHisSerisi.to_csv("./data/sonuclar/uyumlu-"+Secenekler.borsa+".csv")
+uyumluHisSerisi.to_csv("./data/sonuclar/uyumlu-"+Filtreler.borsa+".csv")
 
-if Secenekler.kaldir:
+if Filtreler.kaldir:
     print("Kaldirilanlar hisseler:" + str(kaldirilmisHisseler))
     print(str(len(kaldirilmisHisseler)) + " adet hisse kalkmis")
     kaldHisSerisi = pd.Series(kaldirilmisHisseler)
-    kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+Secenekler.borsa+".csv")
+    kaldHisSerisi.to_csv("./data/kalkmis/kalkmis-"+Filtreler.borsa+".csv")

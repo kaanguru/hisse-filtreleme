@@ -128,3 +128,7 @@ TODO:
 [//]: # (https://docs.python.org/3/tutorial/venv.html)
 
 [RSI hesaplama](https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/)
+
+https://pyinstaller.org/en/stable/
+
+https://nsis.sourceforge.io/Main_Page
