@@ -32,24 +32,24 @@ import time
 # --------------------------------- BEFORE ---------------------------------
 # Your EXISTING code may look like this
 
-MAX=100     # the max number of items you'll process
-for i in range(MAX):
-    # Do your processing stuff here (simulated with this sleep)
-    time.sleep(.1)
-    print(f'Your old code simply looped through {i}')
+# MAX=100     # the max number of items you'll process
+# for i in range(MAX):
+#     # Do your processing stuff here (simulated with this sleep)
+#     time.sleep(.1)
+#     print(f'Your old code simply looped through {i}')
 
 
 # --------------------------------- AFTER ---------------------------------
 # Now let's add a PySimpleGUI one line progress meter
 
-MAX=100     # the max number of items you'll process
-for i in range(MAX):
-    # Here is your line of code
-    sg.one_line_progress_meter('Some test', i+1, MAX)
-    time.sleep(.1)
-    print(f'Your new code still simply loops through, but you also get the nifty progress window {i}')
+# MAX=100     # the max number of items you'll process
+# for i in range(MAX):
+#     # Here is your line of code
+#     sg.one_line_progress_meter('Some test', i, MAX)
+#     time.sleep(.1)
+#     # print(f'Your new code still simply loops through, but you also get the nifty progress window {i}')
 
-sg.popup('Done', 'As you can see, the bar auto disappeared', 'because it reached max value')
+# sg.popup('Done', 'As you can see, the bar auto disappeared', 'because it reached max value')
 
 # --------------------------------- FANCY ---------------------------------
 # What about that "Cancel" button?  Let's hook it up
