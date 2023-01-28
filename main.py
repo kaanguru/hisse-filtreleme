@@ -1,4 +1,4 @@
-import pandas as pd
+import csv
 import PySimpleGUI as sg
 
 import kontroller
@@ -23,7 +23,6 @@ class Filtreler:
     aralik = None
     mum = "1d"
     seviye = "618"
-
 
 sg.theme("Material1")
 layout = [
@@ -70,8 +69,15 @@ while True:
         Filtreler.aralik = values["secilenPeriyod"]
         Filtreler.mum = values["secilenMum"]
         Filtreler.seviye = values["secilenSeviye"]
-        sembolDosyasi = pd.read_csv("./data/semboller/" + Filtreler.borsa + ".csv")
-        tumSemboller = sembolDosyasi["Symbol"]
+        tumSemboller = []
+        with open("./data/semboller/" + Filtreler.borsa + ".csv") as sembolDosyasi:
+            ilkSutun = []
+            reader = csv.reader(sembolDosyasi)
+            for row in reader:
+                ilkSutun.append(row[0])
+            tumSemboller = ilkSutun[1:]
+        # sembolDosyasi = pd.read_csv("./data/semboller/" + Filtreler.borsa + ".csv")
+        # tumSemboller = sembolDosyasi["Symbol"]
         sayac = 0
         hisseAdeti = len(tumSemboller)
         for hisse in tumSemboller:
@@ -91,8 +97,8 @@ while True:
             ):
                 sg.popup_auto_close("Arama iptal ediliyor.")
                 break
-        uyumluHisSerisi = pd.Series(uyumluHisseler)
-        uyumluHisSerisi.to_csv("./data/sonuclar/Fib-Uyumlu-" + Filtreler.borsa + ".csv")
+        # uyumluHisSerisi = pd.Series(uyumluHisseler)
+        # uyumluHisSerisi.to_csv("./data/sonuclar/Fib-Uyumlu-" + Filtreler.borsa + ".csv")
         window["-OUTPUT-"].update(uyumluHisseler)
         sg.clipboard_set(new_value=str(uyumluHisseler))
         sg.popup(

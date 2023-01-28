@@ -1,3 +1,2 @@
 yfinance
-scipy
 PySimpleGUI
