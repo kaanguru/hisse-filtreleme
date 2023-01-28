@@ -159,4 +159,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+<<<<<<< HEAD
 data/sonuclar/Fib-U*
+=======
+data/sonuclar/Fib-uyumlu-*
+>>>>>>> a75bd6699c7d4656e86413a5c83152b453f08184

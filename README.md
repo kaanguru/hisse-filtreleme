@@ -2,17 +2,17 @@
 
 Fibonacci Geri çekilmesi seviyelerine göre hisse filtreleme yapabilirsiniz.
 
-Fibonachi 4. seviye ( **0.618** ) altında kalan hisseleri bulur.
+Fibonachi seviyeleri altında kalan hisseleri bulur.
 
-_İyi bir internet hızınız varsa_, her hissenin kontrolü ortalama 0,25 saniye sürer.
+![screen](screen.gif)
 
-Sonuçlar Excel dosyası halinde verilir.
+_İyi bir internet hızınız varsa_, her hissenin kontrolü ortalama 0,2 saniye sürer.
+
+Sonuçlar Excel (CSV) dosyası halinde verilir.
 
 ## İçindekiler
 
 - [Özellikler](#ozellikler)
-- [Kurulum](#kurulum)
-- [Kullanım](#kullanim)
 - [Seçenek Kodları](#kodlar)
   - [Ülke BORSA kodları](#ulke)
   - [Periyodlar](#periyodlar)
@@ -30,41 +30,7 @@ Sonuçlar Excel dosyası halinde verilir.
 <a target="new" href="https://pypi.python.org/pypi/yfinance"><img border=0 src="https://img.shields.io/badge/python-3,%203.1+-blue.svg?style=flat" alt="Python version"></a>
 <a target="new" href="https://github.com/kaanguru/hisse-filtreleme"><img border=0 src="https://img.shields.io/github/stars/kaanguru/hisse-filtreleme.svg?style=social&label=Star&maxAge=60" alt="Star this repo"></a>
 
-## Kurulum
 
-1. [python 3](https://www.python.org/downloads/) kur. `python --version` ile kurulumu kontrol et.
-1. [hisse-filtreleme.zip](https://github.com/kaanguru/hisse-filtreleme/archive/refs/heads/master.zip) dosyasını indir, bilgisayara aç.
-1. _main.py_ dosyasının olduğu klasörde bir terminal (komut satırı) aç.
-1. `python -m pip install -r requirements.txt` komutu çalıştır.
-1. Programı `python main.py -b de -p 5y` komutu ile çalıştır.
-
-<details><summary>PIP olmadan gerekli paketlerin kurulumu İÇİN TIKLA</summary>
-<p>
-
-1. Sistemine _yfinance_ eklemek için `pip install yfinance` çalıştır.
-1. Sistemine _SciPy_ eklemek için `pip install scipy` çalıştır.
-
-</p>
-</details>
-
-<h2 id="kullanim">Kullanım</h2>
-
-`python .\main.py -b [borsa kodu] -p [periyod kodu]`
-
-- Borsa seçmek için: `-b [kod]`
-- Periyod seçmek için: `-p [kod]`
-
-**Tercihen**
-
-- Mum seçmek için: `-m [kod]`
-
----
-
-**Örneğin**:
-
- `python .\main.py -b de -p 5y`
-
- Almanya borsasında 5 yıllık veriler içinde arama yapar, **data** klasörü içinde **uyumlu-de.csv** dosyasını oluşturup, içine sonuçları yazar.
 
 ---
 
@@ -125,6 +91,6 @@ Sembolleri bulmak için:
 
 TODO:
 
-[//]: # (https://docs.python.org/3/tutorial/venv.html)
-
 [RSI hesaplama](https://www.alpharithms.com/relative-strength-index-rsi-in-python-470209/)
+
+pyinstaller -wF main.py
