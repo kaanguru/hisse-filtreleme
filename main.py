@@ -55,7 +55,8 @@ while True:
         uyumluHisSerisi.to_csv(
             "./data/sonuclar/uyumlu-"+Filtreler.borsa+".csv")
         window['-OUTPUT-'].update(uyumluHisseler)
-        sg.popup(f' {len(uyumluHisseler)} adet uyumlu hisse bulundu,',
+        sg.clipboard_set(new_value=str(uyumluHisseler))
+        sg.popup(f' {len(uyumluHisseler)} adet uyumlu hisse bulundu,yapıştırabilirsiniz',
                  str(uyumluHisseler))
 
 window.close()
