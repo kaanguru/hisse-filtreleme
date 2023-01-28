@@ -4,16 +4,14 @@ import PySimpleGUI as sg
 import kontroller
 
 borsalar = (
-    "Turkiye",
-    "Almanya",
-    "Norvec",
     "Ispanya",
+    "Norvec",
     "Yunanistan",
+    "NASDAQ-Mega",
+    "Almanya",
+    "Turkiye",
     "NASDAQ-Large",
     "NASDAQ-Medium",
-    "XKTUM",
-    "XK100",
-    "XK050",
 )
 periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd", "max")
 mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
