@@ -6,9 +6,8 @@ borsalar = ("Turkiye", "Almanya", "Norvec", "Ispanya",
             "Yunanistan", "NASDAQ-Large", "NASDAQ-Medium", "XKTUM", "XK100", "XK050")
 periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd",  "max")
 mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
-# seviyeler = ("0.382","0.5" "0,618","0.786")
+seviyeler = ("382","5", "618","786")
 uyumluHisseler = []
-csv_yap = False
 
 
 class Filtreler:
@@ -17,9 +16,8 @@ class Filtreler:
     mum = "1d"
     seviye = "618"
 
-
-sg.theme('Material1')
-layout = [[sg.Text('Fibonachi 4. seviye ( 0.618 ) altında kalan hisseleri bulur.')],
+sg.theme('Material')
+layout = [[sg.Text('Fibonachi seviyeleri altında kalan hisseleri bulur.')],
           [sg.HorizontalSeparator()],
           [sg.Text('Borsa', size=(12, 1), pad=(2, 2)), sg.Drop(
               borsalar, key="secilenBorsa", default_value="Turkiye")],
@@ -27,6 +25,8 @@ layout = [[sg.Text('Fibonachi 4. seviye ( 0.618 ) altında kalan hisseleri bulur
               periyodlar, key="secilenPeriyod", default_value="10y")],
           [sg.Text('Mum', size=(12, 1), pad=(2, 2)), sg.Drop(
               mumlar, key="secilenMum", default_value="1d")],
+          [sg.Text('Fib. Seviyesi Seç', size=(12, 1), pad=(2, 2)), sg.Drop(
+              seviyeler, key="secilenSeviye", default_value="618")],
           [sg.InputText(uyumluHisseler, use_readonly_for_disable=True,
                         disabled=True, key='-OUTPUT-', focus=True,
                          expand_y=True, expand_x=True)],
@@ -40,6 +40,7 @@ while True:
         Filtreler.borsa = values["secilenBorsa"]
         Filtreler.aralik = values["secilenPeriyod"]
         Filtreler.mum = values["secilenMum"]
+        Filtreler.seviye = values["secilenSeviye"]
         sembolDosyasi = pd.read_csv("./data/semboller/"+Filtreler.borsa+".csv")
         tumSemboller = sembolDosyasi["Symbol"]
         sayac = 0
