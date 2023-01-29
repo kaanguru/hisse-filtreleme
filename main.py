@@ -11,7 +11,11 @@ borsalar = (
     "Almanya",
     "Turkiye",
     "NasdaqLarge",
+    "XU050",
+    "XU030",
     "XKTUM",
+    "XK100",
+    "XK050",
 )
 periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd", "max")
 mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
@@ -86,6 +90,14 @@ def sembolleriAl():
             tumSemboller = semboller.NasdaqLarge
         case "XKTUM":
             tumSemboller = semboller.XKTUM
+        case "XK100":
+            tumSemboller = semboller.XK100
+        case "XK050":
+            tumSemboller = semboller.XK050
+        case "XU050":
+            tumSemboller = semboller.XU050
+        case "XU030":
+            tumSemboller = semboller.XU030
     return tumSemboller
 
 while True:

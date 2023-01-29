@@ -3,16 +3,20 @@ borsalar = (
     "Ispanya",
     "Norvec",
     "Yunanistan",
-    "NASDAQ-Mega",
+    "NasdaqMega",
     "Almanya",
     "Turkiye",
-    "NASDAQ-Large",
-    "NASDAQ-Medium",
-    "XKTUM"
+    "NasdaqMedium",
+    "NasdaqLarge",
+    "XU050",
+    "XU030",
+    "XKTUM",
+    "XK100",
+    "XK050",
 )
 tumSemboller = []
 for borsa in borsalar:
-    with open("./data/semboller/" + borsa + ".csv") as sembolDosyasi:
+    with open("./data/HisseListeleri/" + borsa + ".csv") as sembolDosyasi:
         ilkSutun = []
         okuyucu = csv.reader(sembolDosyasi)
         for satir in okuyucu:
