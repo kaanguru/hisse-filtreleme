@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 import helpers.kontroller as kontroller
-import semboller
+import data.semboller as semboller
 
 borsalar = (
     "Ispanya",

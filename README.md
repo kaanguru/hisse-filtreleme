@@ -13,6 +13,7 @@ Sonuçlar Excel (CSV) dosyası halinde verilir.
 ## İçindekiler
 
 - [Özellikler](#ozellikler)
+- [Kurulum](#kurulum)
 - [Seçenek Kodları](#kodlar)
   - [Ülke BORSA kodları](#ulke)
   - [Periyodlar](#periyodlar)
@@ -30,7 +31,25 @@ Sonuçlar Excel (CSV) dosyası halinde verilir.
 <a target="new" href="https://pypi.python.org/pypi/yfinance"><img border=0 src="https://img.shields.io/badge/python-3,%203.1+-blue.svg?style=flat" alt="Python version"></a>
 <a target="new" href="https://github.com/kaanguru/hisse-filtreleme"><img border=0 src="https://img.shields.io/github/stars/kaanguru/hisse-filtreleme.svg?style=social&label=Star&maxAge=60" alt="Star this repo"></a>
 
+## Kurulum
 
+1. [python 3](https://www.python.org/downloads/) kur. `python --version` ile kurulumu kontrol et.
+1. [hisse-filtreleme.zip](https://github.com/kaanguru/hisse-filtreleme/archive/refs/heads/master.zip) dosyasını indir, bilgisayara aç.
+1. _main.py_ dosyasının olduğu klasörde bir terminal (komut satırı) aç.
+1. `python -m pip install -r requirements.txt` komutu çalıştır.
+1. Programı `python main.py -b de -p 5y` komutu ile çalıştır.
+
+<details><summary>MacOS ve Linux İÇİN TIKLA</summary>
+<p>
+
+1. [python 3](https://www.python.org/downloads/) kur. `python3 --version` ile kurulumu kontrol et.
+1. [hisse-filtreleme.zip](https://github.com/kaanguru/hisse-filtreleme/archive/refs/heads/master.zip) dosyasını indir, bilgisayara aç.
+1. _main.py_ dosyasının olduğu klasörde bir terminal (komut satırı) aç.
+1. `python3 -m pip install -r requirements.txt` komutu çalıştır.
+1. Programı `python3 main.py` komutu ile çalıştır.
+
+</p>
+</details>
 
 ---
 
