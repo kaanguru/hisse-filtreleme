@@ -73,12 +73,10 @@ while True:
         tumSemboller = []
         with open("./data/semboller/" + Filtreler.borsa + ".csv") as sembolDosyasi:
             ilkSutun = []
-            reader = csv.reader(sembolDosyasi)
-            for row in reader:
-                ilkSutun.append(row[0])
+            okuyucu = csv.reader(sembolDosyasi)
+            for satir in okuyucu:
+                ilkSutun.append(satir[0])
             tumSemboller = ilkSutun[1:]
-        # sembolDosyasi = pd.read_csv("./data/semboller/" + Filtreler.borsa + ".csv")
-        # tumSemboller = sembolDosyasi["Symbol"]
         sayac = 0
         hisseAdeti = len(tumSemboller)
         for hisse in tumSemboller:
@@ -98,8 +96,6 @@ while True:
             ):
                 sg.popup_auto_close("Arama iptal ediliyor.")
                 break
-        # uyumluHisSerisi = pd.Series(uyumluHisseler)
-        # uyumluHisSerisi.to_csv("./data/sonuclar/Fib-Uyumlu-" + Filtreler.borsa + ".csv")
         window["-OUTPUT-"].update(uyumluHisseler)
         sg.clipboard_set(new_value=str(uyumluHisseler))
         sg.popup(
