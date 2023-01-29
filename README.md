@@ -4,7 +4,7 @@ Fibonacci Geri çekilmesi seviyelerine göre hisse filtreleme yapabilirsiniz.
 
 Fibonachi seviyeleri altında kalan hisseleri bulur.
 
-![screen](screen.gif)
+![screen](./img/screen.gif)
 
 _İyi bir internet hızınız varsa_, her hissenin kontrolü ortalama 0,2 saniye sürer.
 

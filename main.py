@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
 
-import kontroller
+import helpers.kontroller as kontroller
 import semboller
+
 borsalar = (
     "Ispanya",
     "Norvec",
@@ -10,13 +11,12 @@ borsalar = (
     "Almanya",
     "Turkiye",
     "NasdaqLarge",
-    "XKTUM"
+    "XKTUM",
 )
 periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd", "max")
 mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
 seviyeler = ("236", "382", "5", "618", "786")
 uyumluHisseler = []
-
 class Filtreler:
     borsa = None
     aralik = None
@@ -26,7 +26,7 @@ class Filtreler:
 sg.theme("Material1")
 layout = [
     [sg.Text("Fibonachi seviyeleri altında kalan hisseleri bulur.")],
-    [sg.Image(filename="./fibo.png")],
+    [sg.Image(filename="./img/fibo.png")],
     [sg.HorizontalSeparator()],
     [
         sg.Text("Borsa", size=(16, 1), pad=(2, 2)),
@@ -61,35 +61,42 @@ layout = [
     ],
 ]
 window = sg.Window("Hisse Filtreleme", layout)
+
+def filtreleriEsitle(values):
+    Filtreler.borsa = values["secilenBorsa"]
+    Filtreler.aralik = values["secilenPeriyod"]
+    Filtreler.mum = values["secilenMum"]
+    Filtreler.seviye = values["secilenSeviye"]
+
+def sembolleriAl():
+    match Filtreler.borsa:
+        case "Ispanya":
+            tumSemboller = semboller.Ispanya
+        case "Norvec":
+            tumSemboller = semboller.Norvec
+        case "Yunanistan":
+            tumSemboller = semboller.Yunanistan
+        case "NasdaqMega":
+            tumSemboller = semboller.NasdaqMega
+        case "Almanya":
+            tumSemboller = semboller.Almanya
+        case "Turkiye":
+            tumSemboller = semboller.Turkiye
+        case "NasdaqLarge":
+            tumSemboller = semboller.NasdaqLarge
+        case "XKTUM":
+            tumSemboller = semboller.XKTUM
+    return tumSemboller
+
 while True:
     event, values = window.read()
     if event == event == "Ara":
-        Filtreler.borsa = values["secilenBorsa"]
-        Filtreler.aralik = values["secilenPeriyod"]
-        Filtreler.mum = values["secilenMum"]
-        Filtreler.seviye = values["secilenSeviye"]
-        match Filtreler.borsa:
-            case "Ispanya":        
-                tumSemboller = semboller.Ispanya
-            case  "Norvec":
-                tumSemboller = semboller.Norvec
-            case  "Yunanistan":
-                tumSemboller = semboller.Yunanistan
-            case  "NasdaqMega":
-                tumSemboller = semboller.NasdaqMega
-            case  "Almanya":
-                tumSemboller = semboller.Almanya
-            case  "Turkiye":
-                tumSemboller = semboller.Turkiye
-            case  "NasdaqLarge":
-                tumSemboller = semboller.NasdaqLarge
-            case  "XKTUM":
-                tumSemboller = semboller.XKTUM
-        sayac = 0
+        uyumluHisseler.clear()
+        filtreleriEsitle(values)
+        tumSemboller = sembolleriAl()
         hisseAdeti = len(tumSemboller)
-        for hisse in tumSemboller:
-            sayac = sayac + 1
-            uyumluHisseler.clear
+        for sayac, hisse in enumerate(tumSemboller):
+            sayac +=  1
             if kontroller.fibSeviyeAltinda(hisse, Filtreler):
                 uyumluHisseler.append(hisse)
             if (
