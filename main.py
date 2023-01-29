@@ -1,17 +1,15 @@
-import csv
 import PySimpleGUI as sg
 
 import kontroller
-
+import semboller
 borsalar = (
     "Ispanya",
     "Norvec",
     "Yunanistan",
-    "NASDAQ-Mega",
+    "NasdaqMega",
     "Almanya",
     "Turkiye",
-    "NASDAQ-Large",
-    "NASDAQ-Medium",
+    "NasdaqLarge",
     "XKTUM"
 )
 periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd", "max")
@@ -70,13 +68,23 @@ while True:
         Filtreler.aralik = values["secilenPeriyod"]
         Filtreler.mum = values["secilenMum"]
         Filtreler.seviye = values["secilenSeviye"]
-        tumSemboller = []
-        with open("./data/semboller/" + Filtreler.borsa + ".csv") as sembolDosyasi:
-            ilkSutun = []
-            okuyucu = csv.reader(sembolDosyasi)
-            for satir in okuyucu:
-                ilkSutun.append(satir[0])
-            tumSemboller = ilkSutun[1:]
+        match Filtreler.borsa:
+            case "Ispanya":        
+                tumSemboller = semboller.Ispanya
+            case  "Norvec":
+                tumSemboller = semboller.Norvec
+            case  "Yunanistan":
+                tumSemboller = semboller.Yunanistan
+            case  "NasdaqMega":
+                tumSemboller = semboller.NasdaqMega
+            case  "Almanya":
+                tumSemboller = semboller.Almanya
+            case  "Turkiye":
+                tumSemboller = semboller.Turkiye
+            case  "NasdaqLarge":
+                tumSemboller = semboller.NasdaqLarge
+            case  "XKTUM":
+                tumSemboller = semboller.XKTUM
         sayac = 0
         hisseAdeti = len(tumSemboller)
         for hisse in tumSemboller:
