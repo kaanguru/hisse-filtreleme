@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
-import helpers.kontroller as kontroller
 import data.semboller as semboller
+import helpers.kontroller as kontroller
 
 borsalar = (
     "Ispanya",
@@ -21,6 +21,7 @@ periyodlar = ("1y", "2y", "5y", "10y", "15y", "ytd", "max")
 mumlar = ("60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo")
 seviyeler = ("236", "382", "5", "618", "786")
 uyumluHisseler = []
+
 class Filtreler:
     borsa = None
     aralik = None
@@ -32,6 +33,7 @@ layout = [
     [sg.Text("Fibonachi seviyeleri altında kalan hisseleri bulur.")],
     [sg.Image(filename="./img/fibo.png")],
     [sg.HorizontalSeparator()],
+    [sg.Text(visible=False)],
     [
         sg.Text("Borsa", size=(16, 1), pad=(2, 2)),
         sg.Drop(borsalar, key="secilenBorsa", default_value="Turkiye"),
@@ -66,11 +68,13 @@ layout = [
 ]
 window = sg.Window("Hisse Filtreleme", layout)
 
+
 def filtreleriEsitle(values):
     Filtreler.borsa = values["secilenBorsa"]
     Filtreler.aralik = values["secilenPeriyod"]
     Filtreler.mum = values["secilenMum"]
     Filtreler.seviye = values["secilenSeviye"]
+
 
 def sembolleriAl():
     match Filtreler.borsa:
@@ -108,7 +112,7 @@ while True:
         tumSemboller = sembolleriAl()
         hisseAdeti = len(tumSemboller)
         for sayac, hisse in enumerate(tumSemboller):
-            sayac +=  1
+            sayac += 1
             if kontroller.fibSeviyeAltinda(hisse, Filtreler):
                 uyumluHisseler.append(hisse)
             if (
