@@ -8,7 +8,7 @@ def fibSeviyeAltinda(hisse, Filtreler):
     try:
         if Filtreler.borsa == "Turkiye" or Filtreler.borsa.startswith("XK"):
             hisse = hisse + ".IS"
-        if Filtreler.borsa == "Norvec":
+        elif Filtreler.borsa == "Norvec":
             hisse = hisse + ".OL"
         if Filtreler.aralik == "15y":
             df = yf.download(
